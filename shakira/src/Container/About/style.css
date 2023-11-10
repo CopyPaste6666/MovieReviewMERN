@@ -1,0 +1,70 @@
+/* aboutUs.css */
+
+/* Style the page header */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #ff44b7;
+    margin-top: 20px;
+  }
+  
+  /* Style the "About Us" section */
+  .about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  /* Style the "Our Team" section */
+  .team {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(7, 0, 6, 0.1);
+  }
+  
+  .team h2 {
+    text-align: center;
+    font-size: 24px;
+    color:#ed9ecf;
+    margin-bottom: 20px;
+  }
+  
+  .team-member {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #272727e9;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #141414;
+    transition: background-color 0.2s ease;
+  }
+  
+  .team-member:hover {
+    background-color: #605b5b6d;
+  }
+  
+  .team-member-name {
+    color:aliceblue;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .team-member-details {
+    display: none;
+    margin-top: 10px;
+  }
+  
+  /* Center-align elements within sections */
+  .about, .team {
+    text-align: center;
+  }
+  
