@@ -7,14 +7,14 @@ import { BsFacebook, BsLinkedin, BsTwitter, BsStackOverflow, BsGoogle, BsGithub,
 import './style.css';
 const  ContactContainer = ()=>{
     const myData = [
-        {name:'Facebook', link:'', text:'Follow to my facebook.'},
-        {name:'Linkedin', link:'', text:'Follow to my linkedin.'},
-        {name:'Twitter', link:'', text:'Follow to my twitter.'},
-        {name:'StackOverFlow', link:'', text:'Check out to my stackoverflow account.'},
-        {name:'Blog', link:'', text:'Follow to my blog.'},
-        {name:'GitHub', link:'', text:'Follow to my github account.'},
-        {name:'YouTube', link:'', text:'Follow to my youtube channel.'},
-        {name:'Email', link:'',  text:'write to me a mail'}
+        {name:'Facebook', link:'#', text:'Follow to my facebook.'},
+        {name:'Linkedin', link:'#', text:'Follow to my linkedin.'},
+        {name:'Twitter', link:'#', text:'Follow to my twitter.'},
+        {name:'StackOverFlow', link:'#', text:'Check out to my stackoverflow account.'},
+        {name:'Blog', link:'#', text:'Follow to my blog.'},
+        {name:'GitHub', link:'#', text:'Follow to my github account.'},
+        {name:'YouTube', link:'#', text:'Follow to my youtube channel.'},
+        {name:'Email', link:'#',  text:'write to me a mail'}
     ]
     return (
         <div className='contactWrap'>

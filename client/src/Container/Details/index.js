@@ -1,105 +1,62 @@
 import React, {useState, useEffect} from 'react';
-
-
-//for getting details page video in 2hour 1min
-import { useParams } from 'react-router-dom';
-
+import {useParams} from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import axios from 'axios';
 import './details.css';
+import axios from 'axios';
+import DarkVariantExample from '../../Components/Carousel';
 import {img_300, img_not_available} from '../../Config';
-import DarkVariantExample from'../../Components/Carousel';
-import StarRating from './StarRating'; 
+import StarRating from './StarRating';
 
-
-const DetailsContainer = () =>{
+const DetailsContainer = ()=>{
     const params = useParams();
     const [content, setContent] = useState();
-    const[video, setVideo] = useState();
-    const [credits, setCredits] = useState(); 
+    const [video, setVideo] = useState();
+    const [credits, setCredits] = useState();
+    const titleName =  content && content.name && content.name !== '' ? content.name : content && content.title && content.title !== '' ?  content.title : '';
     
-    const titleName = content && content.name && content.name !== '' ? content.name : content &&  content.title && content.title !=='' ? content.title : '';
 
+
+    // console.log('params', params);
     const id = params.movieid || '';
-    const _media_type = params.mediatype || '';
+    const _media_type = params && params.mediatype &&  params.mediatype !== '' ? params.mediatype.toLowerCase() : '';
     const API_KEY = process.env.REACT_APP_NOT_SECRET_CODE;
 
-    const fetchMovie = async () => {
+    const fetchData = async () =>{
         try{
-            const{data} = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
-            setContent(data)
+          const {data} = await axios.get(`https://api.themoviedb.org/3/${_media_type}/${id}?api_key=${API_KEY}&language=en-US`);
+          setContent(data);
+          //console.log('fetchData details',  data);
+        }catch(error){
+          console.error(error)
         }
-        catch(error){
-            console.error(error)
+    }
+    const fetchVideo = async () =>{
+        try{
+          const {data} = await axios.get(`https://api.themoviedb.org/3/${_media_type}/${id}/videos?api_key=${API_KEY}&language=en-US`);
+          setVideo(data.results[0]?.key);
+          //console.log('fetchVideo',  data);
+        }catch(error){
+          console.error(error)
         }
     }
 
-    const fetchTv = async () => {
+    const creditsFetch = async ()=>{
         try{
-            const{data} = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`);
-            setContent(data)
-        }
-        catch(error){
-            console.error(error)
+          const {data} = await axios.get(`https://api.themoviedb.org/3/${_media_type}/${id}/credits?api_key=${API_KEY}&language=en-US`);
+          setCredits(data.cast);
+          console.log('sdata',  data);
+        }catch(error){
+          console.error(error)
         }
     }
 
-        const fetchVideoMovie = async () => {
-            try {
-                const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`);
-                setVideo(data.results[0].key);
-            }
-            catch(error)
-            {
-                console.error(error)
-            }
-        }
-
-        const fetchVideoTv = async () => {
-            try {
-                const {data} = await axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=en-US`);
-                setVideo(data.results[0].key);
-            }
-            catch(error)
-            {
-                console.error(error)
-            }
-        }
-
-        const creditsFetchMovie = async () => {
-            try{
-                const{data} = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
-                setCredits(data.cast);
-                console.log('sdata', data);
-            }
-            catch (error){
-                console.error(error)
-            }
-        }
-        
-        const creditsFetchTv = async () => {
-            try{
-                const{data} = await axios.get(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=en-US`)
-                setCredits(data.cast);
-                console.log('sdata', data);
-            }
-            catch (error){
-                console.error(error)
-            }
-        }
-        useEffect(()=>{
-            fetchMovie();
-            fetchTv();
-            fetchVideoMovie();
-            fetchVideoTv();
-            creditsFetchMovie();
-            creditsFetchTv();
-       
-        //eslint-disable-next-line 
-        //The above comment disables the error that shows eslint.
-        
+    useEffect(()=>{
+        fetchData();
+        fetchVideo();
+        creditsFetch();
+        //eslint-disable-next-line
     }, [])
 
     const renderDataHtml = ()=>{
@@ -113,11 +70,10 @@ const DetailsContainer = () =>{
         const first_air_date = content.first_air_date || content.release_date;
         const  budget = content.budget || '';
         const genres = content.genres && content.genres.length > 0 ? content.genres.map((item)=> <span  key={item.id}>{item.name}</span>) : '' ;
-
         return (
             <Row>
                 <Col className='col-12'>
-                    <h1 className='randi'>
+                    <h1 className='white-title'>
                         {titleName} 
                         {
                             tagline && tagline !== '' ? <small> {tagline}</small> : ''
@@ -140,18 +96,17 @@ const DetailsContainer = () =>{
                             </div>
                             <ul className="card__meta">
                                 <li>
-                                    <span>Genre : </span> 
+                                    <span>Genre:</span> 
                                     <span className='linkTag'>{genres}</span>
                                 </li>
-                                
                                 <li>
-                                    <span>Type : </span> 
+                                    <span>Type:</span> 
                                     <span className='linkTag'>{_media_type}</span>
                                 </li>
                                 
-                                <li><span>Release year :</span> <span className='linkTag'>{first_air_date}</span></li>
+                                <li><span>Release year:</span> <span className='linkTag'>{first_air_date}</span></li>
                                 {
-                                    budget && budget !== '' ? <li><span>Budget : </span>
+                                    budget && budget !== '' ? <li><span>Budget:- </span>
                                     <span className='linkTag'> {budget}</span></li> : ''
                                 }
                                 
@@ -173,30 +128,28 @@ const DetailsContainer = () =>{
                                 <span className='iconYoutube'></span>
                             </figure>
                         </a> */}
-                        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${video}`} title="YouTube video player" frameBorder ="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${video}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                 </Col>
             </Row>
         )
     }
-    return(
+    return (
         <>
             <main className='detailsPage'>
+            <Container>
+                {
+                    titleName && titleName !==  '' ? renderDataHtml() : 'Loading...'
+                }
                 
-                <Container>
-                    {
-                        titleName && titleName !== '' ? renderDataHtml() :
-                        'Loading...'
-                    }
-                </Container>
-
-                <section className='section'>
+            </Container>
+            <section className='section'>
                 <div  className='contentHead'>
                     <Container>
                         <Row>
                             <Col className='col-12'>
                                 {
-                                    credits && credits.length > 0 ? <DarkVariantExample data={credits} /> : 'Loading data...'
+                                    credits && credits.length > 0 ? <DarkVariantExample data={credits} /> : 'Lading data...'
                                 }
                                 
                             </Col>
@@ -204,10 +157,7 @@ const DetailsContainer = () =>{
                     </Container>
                 </div>
             </section>
-            
-
-                {/* Add the StarRating component below */}
-                <div className="star-rating">
+            <div className="star-rating">
                     <h3 className='Rh3'>Rate this Movie</h3>
                     <StarRating totalStars={10} /> {/* You can adjust the totalStars as needed */}
                 </div>
@@ -219,12 +169,9 @@ const DetailsContainer = () =>{
                                              
                             </div>
                 </div>
-
-
-            </main>
+        </main>
         </>
     )
 }
-
 
 export default DetailsContainer;

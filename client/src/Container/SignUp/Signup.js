@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 //import signpic from "./images/signup.svg";
 //import ('./App.css');
-
+import {useNavigate } from 'react-router-dom';
 const Signup = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -14,6 +15,32 @@ const Signup = () => {
         const name = e.target.name;
         const value = e.target.value;
         setUser({ ...user, [name]: value });
+    }
+
+    const PostData = async (e) => {
+        e.preventDefault();
+
+        const { name , email , password , cpassword } = user;
+        const res = await fetch("/register" , {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                name , email , password , cpassword
+            })
+        });
+
+        const data = await res.json();
+        
+        if(data.status === 422 || !data){
+            window.alert("Invalid Registration");
+            console.log("Invalid Registration");
+        } else {
+            window.alert("Registration Successfull");
+            console.log("Registration Successfull");
+            navigate("/signin");
+        }
     }
 
     return (
@@ -69,8 +96,9 @@ const Signup = () => {
 
                             <div className="form-group form-button">
                                 <input type="submit" name="signup" id="signup" className="form-submit"
-                                    value="Register"
+                                    value="Register" onClick={PostData}
                                     // You can add onClick={yourFunction} here to handle the form submission
+                                
                                 />
                             </div>
                         </form>
