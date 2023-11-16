@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 //import loginpic from "./images/login.svg";
 //import ('./App.css');
-
+import { useNavigate } from 'react-router-dom';
+//import { useContext } from '../Components/header';
 
 const Login = () => {
+   // const context = useContext(contextValue);
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -11,6 +15,29 @@ const Login = () => {
         e.preventDefault();
 
         // Handle user login logic here
+        
+        const res = await fetch("/signin" , {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                email , password 
+            })
+        });
+        const data = await res.json();
+        
+        if(res.status === 400 || !data){
+            window.alert("Invalid Registration");
+            console.log("Invalid Registration");
+        } else {
+            //dispatch({type:"USER" ,payload :true});
+            window.alert("Logged In  Successfully");
+            console.log("Logged In Successfully");
+            navigate("/");
+        }
+
+
     }
 
     return (
@@ -22,7 +49,7 @@ const Login = () => {
                     </div>
                     <div className="signin-form">
                         <h2 className="form-title">Sign In</h2>
-                        <form className="register-form">
+                        <form method="POST" className="register-form" onSubmit={loginUser}>
                             <div className="form-group">
                                 <label htmlFor="email">
                                     <i className="zmdi zmdi-email material-icons-name"></i>
@@ -46,7 +73,7 @@ const Login = () => {
                             <div className="form-group form-button">
                                 <input type="submit" name="signin" id="signin" className="form-submit"
                                     value="Log In"
-                                    onClick={loginUser}
+                                    
                                 />
                             </div>
                         </form>

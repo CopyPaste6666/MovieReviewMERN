@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+require('../db/conn');
+const User = require("../models/userSchema");
+
+const SRating = require ('../models/ratingSchema');
+const Authenticate = require('../middleware/authentication');
 
 router.get('/', (req, res) => {
     res.send(`Hello world from the server rotuer js`);
 });
 
-router.post('/details', async (req, res) => {
+router.post('/details', Authenticate ,async (req, res) => {
     //console.log(req.body);
     //res.json({ message: req.body });
     // res.send("mera register page");

@@ -4,6 +4,9 @@
 .randi{
   color:aliceblue;
 }
+.white-title{
+  color: aliceblue;
+}
 ul, ul li{
     list-style-type: none;
     padding: 0;

@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Link} from 'react-router-dom'
 
 const HeaderComponents = () => {
+    
 
     const navData = [
         { name:'Home', link:'/'},
@@ -13,15 +14,10 @@ const HeaderComponents = () => {
         { name:'Tv Series', link:'/series'},
         { name:'Contact Us', link:'/contact'},
         { name:'About', link:'/about'},
-
-
-
-
-
-
         { name:'Search', link:'/search'},
         { name: 'Sign Up', link:'/signup'},
-        { name: 'Sign In', link:'/signin'}
+        { name: 'Sign In', link:'/signin'},
+        { name: 'Sign Out', link:'/signout'}
     ]
 
     return(

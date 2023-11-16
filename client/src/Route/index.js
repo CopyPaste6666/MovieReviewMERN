@@ -12,6 +12,8 @@ import SearchContainer from '../Container/Search';
 import AboutContainer from '../Container/About';
 import SignUpContainer from '../Container/SignUp/Signup';
 import SignInContainer from '../Container/SignUp/Login';
+import SignOutContainer from '../Container/SignUp/Logout';
+
 
 const  RouteComponent = ()=>{
 
@@ -28,6 +30,7 @@ const  RouteComponent = ()=>{
                         <Route path="/contact" element={<ContactContainer />} />
                         <Route path="/signup" element={<SignUpContainer />} />
                         <Route path="/signin" element={<SignInContainer />} />
+                        <Route path="/signout" element={<SignInContainer />} />
                         <Route path="/details/:movieid/:mediatype" element={<DetailsContainer />} />
                     </Routes>        
                 <FooterComponent />

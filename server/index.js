@@ -13,6 +13,8 @@ app.use(express.json());
 // we link the router files to make our route easy 
 app.use(require('./router/auth'));
 
+app.use(require('./router/StarRate'));
+
 //const User = require('./models/userSchema');
 const PORT = process.env.PORT;
 

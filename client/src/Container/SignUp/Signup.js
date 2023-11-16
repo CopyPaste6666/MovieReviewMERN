@@ -33,7 +33,7 @@ const Signup = () => {
 
         const data = await res.json();
         
-        if(data.status === 422 || !data){
+        if(res.status === 422 || !data){
             window.alert("Invalid Registration");
             console.log("Invalid Registration");
         } else {
@@ -49,7 +49,7 @@ const Signup = () => {
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign up</h2>
-                        <form method="POST" className="register-form" id="register-form">
+                        <form method="POST" className="register-form" id="register-form" onSubmit={PostData}>
                             <div className="form-group">
                                 <label htmlFor="name">
                                     <i className="zmdi zmdi-account material-icons-name"></i>
@@ -96,7 +96,7 @@ const Signup = () => {
 
                             <div className="form-group form-button">
                                 <input type="submit" name="signup" id="signup" className="form-submit"
-                                    value="Register" onClick={PostData}
+                                    value="Register" 
                                     // You can add onClick={yourFunction} here to handle the form submission
                                 
                                 />

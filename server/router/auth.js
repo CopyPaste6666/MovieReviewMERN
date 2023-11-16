@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const authenticate = require('../middleware/authentication');
 require('../db/conn');
 const User = require('../models/userSchema');
 
@@ -92,6 +93,17 @@ router.post('/signin', async (req, res) => {
             
         }catch (err) {
             console.log(err);
+            res.status(500).json({error: err.message});
         }
 });
+
+// logout
+
+router.get('/logout',(req, res) => {
+    console.log(`Hello my Logout Page`);
+    res.clearCookie('jwtoken', { path: '/' });
+    res.status(200).send('User lOgout');
+});
+
+
 module.exports = router;
