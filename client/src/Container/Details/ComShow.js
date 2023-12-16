@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Reviews = () => {
+const ComShow = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Reviews = () => {
 
     return (
         <div>
-            <h2>Customer Reviews</h2>
+            <h2>Reveiws</h2>
             {reviews.length > 0 ? (
                 <ul>
                     {reviews.map((review) => (

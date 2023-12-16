@@ -8,6 +8,7 @@ import axios from 'axios';
 import DarkVariantExample from '../../Components/Carousel';
 import {img_300, img_not_available} from '../../Config';
 import StarRating from './StarRating';
+import ComShow from './ComShow';
 
 const DetailsContainer = ()=>{
     const params = useParams();
@@ -20,6 +21,7 @@ const DetailsContainer = ()=>{
 
     // console.log('params', params);
     const id = params.movieid || '';
+    //console.log(id);
     const _media_type = params && params.mediatype &&  params.mediatype !== '' ? params.mediatype.toLowerCase() : '';
     const API_KEY = process.env.REACT_APP_NOT_SECRET_CODE;
 
@@ -159,14 +161,12 @@ const DetailsContainer = ()=>{
             </section>
             <div className="star-rating">
                     <h3 className='Rh3'>Rate this Movie</h3>
-                    <StarRating totalStars={10} /> {/* You can adjust the totalStars as needed */}
+                    <StarRating totalStars={10} initialMovieId={id} /> {/* You can adjust the totalStars as needed */}
                 </div>
 
                 <div className='comSec'>
-                    <h3>Comment</h3>
                             <div className='Sec'>
-                        
-                                             
+                                 
                             </div>
                 </div>
         </main>

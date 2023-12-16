@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const jwt = require('jsonwebtoken');
 const ratingSchema = new mongoose.Schema({
-    objid: {
+    movieId: {
         type: String,
         required: true
     },

@@ -1,8 +1,7 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 require('../db/conn');
-const User = require("../models/userSchema");
 
 const SRating = require ('../models/ratingSchema');
 const Authenticate = require('../middleware/authentication');
@@ -10,6 +9,8 @@ const Authenticate = require('../middleware/authentication');
 router.get('/', (req, res) => {
     res.send(`Hello world from the server rotuer js`);
 });
+
+
 
 router.post('/details', Authenticate ,async (req, res) => {
     //console.log(req.body);
@@ -20,6 +21,9 @@ router.post('/details', Authenticate ,async (req, res) => {
 
     if( !rating || !comment){
         return res.status(422).json({error:"please fill the feild properly"});
+    }
+    else if(!Authenticate){
+        return res.status(401).json({error:"User UnAuthenticated"});
     }
     try{
        const userExist = await SRating.findOne({email:email})

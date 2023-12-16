@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userSchema");
 
-const Authenticate = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
     try {
 
         const token = req.cookies.jwtoken;
@@ -14,13 +14,13 @@ const Authenticate = async (req, res, next) => {
         req.token = token;
         req.rootUser = rootUser;
         req.userID = rootUser._id;
-
+        console.log(req.cookies.jwtoken);
         next();
         
     } catch (err) {
-        res.status(401).send('Unauthorized:No token provided');
+        res.status(401).json({ error: 'Unauthorized: No token provided' });
         console.log(err);
     }
 }
 
-module.exports = Authenticate;
+module.exports = authenticate;

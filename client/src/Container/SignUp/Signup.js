@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import signpic from "./images/signup.svg";
-//import ('./App.css');
+import './signup.css';
 import {useNavigate } from 'react-router-dom';
 const Signup = () => {
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Signup = () => {
 
     return (
         <section className="signup">
-            <div className="container mt-5">
+            <div className="container-mt-5">
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign up</h2>
@@ -94,7 +94,7 @@ const Signup = () => {
                                 />
                             </div>
 
-                            <div className="form-group form-button">
+                            <div className="form-group-form-button">
                                 <input type="submit" name="signup" id="signup" className="form-submit"
                                     value="Register" 
                                     // You can add onClick={yourFunction} here to handle the form submission

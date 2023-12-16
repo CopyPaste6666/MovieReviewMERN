@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import loginpic from "./images/login.svg";
-//import ('./App.css');
+import './signup.css';
 import { useNavigate } from 'react-router-dom';
 //import { useContext } from '../Components/header';
 
@@ -42,7 +42,7 @@ const Login = () => {
 
     return (
         <section className="sign-in">
-            <div className="container mt-5">
+            <div className="container-mt-5">
                 <div className="signin-content">
                     <div className="signin-image">
                         
@@ -70,7 +70,7 @@ const Login = () => {
                                     placeholder="Your Password"
                                 />
                             </div>
-                            <div className="form-group form-button">
+                            <div className="form-group-form-button">
                                 <input type="submit" name="signin" id="signin" className="form-submit"
                                     value="Log In"
                                     
